@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   getFirestore,
   collection,
@@ -11,6 +11,7 @@ import {
   where,
   serverTimestamp,
 } from "firebase/firestore"
+import { TextField } from "@mui/material"
 
 function TodoForm() {
   const [todo, setTodo] = useState("")
@@ -44,20 +45,25 @@ function TodoForm() {
           e.preventDefault()
           submitTodo()
         }}
+        style={{
+          backgroundColor: "#fff",
+          width: "50%",
+          margin: "0px auto",
+          paddingTop: 15,
+        }}
       >
-        <input
+        {/* <input
           type="text"
           name="title"
           id="title"
           value={todo}
           onChange={(e) => setTodo(e.target.value)}
-        />
-        <input
-          type="checkbox"
-          name="completed"
-          id="completed"
-          checked={completed}
-          onChange={(e) => setCompleted(e.target.checked)}
+        /> */}
+        <TextField
+          label="Type your todo..."
+          color="secondary"
+          value={todo}
+          onChange={(e) => setTodo(e.target.value)}
         />
       </form>
     </div>

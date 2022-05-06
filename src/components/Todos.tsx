@@ -11,7 +11,8 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore"
-
+import { Button, Checkbox } from "@mui/material"
+import DeleteIcon from "@mui/icons-material/Delete"
 type Todo = { title: string; id: string; completed: boolean }
 function Todos({ todos = [] }) {
   const db = getFirestore()
@@ -43,15 +44,23 @@ function Todos({ todos = [] }) {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              width: 220,
+              alignItems: "center",
+              maxWidth: 320,
               margin: "10px auto",
               border: "1px solid #334",
               padding: 10,
               borderRadius: 8,
+              backgroundColor: "#fff",
             }}
           >
-            <input
+            {/* <input
               type="checkbox"
+              checked={todo.completed}
+              onChange={(e) => {
+                updateTodo(e.target.checked, todo.id)
+              }}
+            /> */}
+            <Checkbox
               checked={todo.completed}
               onChange={(e) => {
                 updateTodo(e.target.checked, todo.id)
@@ -64,7 +73,14 @@ function Todos({ todos = [] }) {
             >
               {todo.title}
             </p>
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            <Button
+              variant="contained"
+              color="error"
+              startIcon={<DeleteIcon />}
+              onClick={() => deleteTodo(todo.id)}
+            >
+              Delete
+            </Button>
           </div>
         )
       })}

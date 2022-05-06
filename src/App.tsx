@@ -28,8 +28,8 @@ function App() {
 
   //collection ref
   const colRef = collection(db, "todos")
-  const q = query(colRef, orderBy("createdAt"))
-  onSnapshot(q, (snapshot) => {
+  // const q = query(colRef, orderBy("createdAt"))
+  onSnapshot(colRef, (snapshot) => {
     let todos: any = []
     snapshot.docs.forEach((doc) => {
       const todo: any = { ...doc.data(), id: doc.id }
